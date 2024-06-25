@@ -29,7 +29,7 @@ MULTIPLE_VALUE_KEYS = {
 
 
 async def get_person_data(person_id, http_session) -> dict:
-    
+
     response = await http_session.get(f"https://swapi.py4e.com/api/people/{person_id}")
     person_raw_data = await response.json()
     result_code = response.status
@@ -48,6 +48,7 @@ async def get_person_data(person_id, http_session) -> dict:
 
 
 async def get_link(key, raw_data):
+    
     session = aiohttp.ClientSession()
     if type(raw_data) is str:
         raw_data = [raw_data]
@@ -62,6 +63,7 @@ async def get_link(key, raw_data):
 
 
 async def insert_people(people_list_json, person_id):
+    
     people_list = [
         SWPeople(
             person_id=person_id + counter + 1,
@@ -104,6 +106,7 @@ async def main():
     current_task = asyncio.current_task()
     tasks.remove(current_task)
     await asyncio.gather(*tasks)
+    
     print("All tasks are finished.")
 
 
